@@ -6,6 +6,7 @@ So uhh... It's simple, just copy everything and put them in the correct director
 The goal is to make a functional yet responsive setup. Thus, there is zero composition.
 
 # Prerequisites
+One way to install the all the following stuff is to run the `setup-arch.sh` file included. But read through (and edit) it carefully to make sure it's up to your liking!!
 - [yay](https://github.com/Jguer/yay) (to install stuff from the [AUR](https://aur.archlinux.org/)) (you can also use [paru](https://github.com/Morganamilo/paru), or build packages from source)
 - [tofi](https://github.com/philj56/tofi) (an app launcher similar to [rofi](https://github.com/davatorium/rofi) and [wofi](https://github.com/SimplyCEO/wofi)) (also used for clipboard display)
 - [sway](https://github.com/swaywm/sway) (and swaybg, swaylock, swayidle)
