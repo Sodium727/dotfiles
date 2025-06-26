@@ -16,7 +16,7 @@ The goal is to make a functional yet responsive setup. Thus, there is zero compo
 - [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) (need to install [zsh](https://www.zsh.org/) shell first)
 - [thunar](https://github.com/neilbrown/thunar) (file manager) (currently it's the fastest one I could find)
 ### Optional
-- [waybar](https://github.com/Alexays/Waybar) is optional. Personally I'm comfortable with the status bar Sway provides.
+- [waybar](https://github.com/Alexays/Waybar). Personally I'm comfortable with the status bar Sway provides.
 - [fcitx5](https://github.com/fcitx/fcitx5) (for keyboard language)
 
 # Usage
