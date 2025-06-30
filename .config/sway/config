@@ -70,6 +70,16 @@ input type:keyboard {
   repeat_delay 180
   repeat_rate 80
 }
+
+input type:touchpad {
+  dwt enabled
+  tap disabled
+  natural_scroll disabled
+  middle_emulation enabled
+  drag enabled
+  scroll_method edge
+  events disabled_on_external_mouse
+}
 #
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
@@ -83,7 +93,9 @@ input type:keyboard {
   bindsym $mod+t exec $term
 
   # Start a file manager
-  bindsym $mod+e exec $fileMan
+  # bindsym $mod+e exec $fileMan
+  bindsym $mod+e exec $term -e nnn
+  bindsym $mod+Shift+e exec $term -e nnn -H
 
   # Kill focused window
   bindsym $mod+q kill
@@ -104,7 +116,7 @@ input type:keyboard {
   bindsym $mod+Shift+c reload
 
   # Exit sway (logs you out of your Wayland session)
-  bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Ye' 'swaymsg exit'
+  bindsym $mod+Shift+p exec swaynag -t warning -m 'Exit sway?' -B 'Ye' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -242,7 +254,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-  position bottom
+  position top
 
   # When the status_command prints a new line to stdout, swaybar updates.
   # The default just shows the current date and time.
@@ -253,10 +265,23 @@ bar {
   # pango-list | grep -i 'something'
 
   colors {
-    statusline #000000
-    background #32323200
-    inactive_workspace #32323200 #32323200 #5c5c5c
+    statusline            #E0C097
+    background            #2A2C31E6
+    inactive_workspace    #2A2C31E6    #2A2C31E6    #55555566
+    active_workspace      #FF9E64CC    #FF9E64CC    #FF9E64AA
+    urgent_workspace      #D15C5CCC    #D15C5CCC    #D15C5C88
+    separator             #444A54
   }
+
+  colors {
+    statusline            #C0D6E4
+    background            #1F2228CC
+    inactive_workspace    #1F2228CC    #1F2228CC    #555F6A88
+    active_workspace      #74C7E7DD    #74C7E7DD    #74C7E7AA
+    urgent_workspace      #E06C75CC    #E06C75CC    #E06C7588
+    separator             #2E3138
+  }
+
 }
 
 include /etc/sway/config.d/*
@@ -277,7 +302,7 @@ bindsym $mod+v exec cliphist list | tofi \
 bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
 exec fcitx5 >/dev/null 2>&1 &
-exec mako >/dev/null 2>&1 &
+exec swaync >/dev/null 2>&1 &
 
 # Make notifications and pop-ups float
 for_window [window_type="notification"] floating enable
@@ -286,4 +311,6 @@ for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
 bindsym $mod+p exec ~/.config/sway/power.sh
+
+default_border pixel 1
 

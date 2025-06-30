@@ -15,10 +15,11 @@ One way to install the all the following stuff is to run the `setup-arch.sh` fil
 - [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) (take screenshots)
 - [alacritty](https://github.com/alacritty/alacritty) (terminal)
 - [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) (need to install [zsh](https://www.zsh.org/) shell first)
-- [thunar](https://github.com/neilbrown/thunar) (file manager) (currently it's the fastest one I could find)
+- [nnn](https://github.com/jarun/nnn) (TUI file manager) 
 ### Optional
 - [waybar](https://github.com/Alexays/Waybar). Personally I'm comfortable with the status bar Sway provides.
 - [fcitx5](https://github.com/fcitx/fcitx5) (for keyboard language)
+- [thunar](https://github.com/neilbrown/thunar) (GUI file manager). Sometimes I use it when I drag-drop files
 
 # Usage
 Make sure to back up your current configurations.
@@ -48,10 +49,3 @@ The procedure is similar if you want to change lock screen background (edit all 
 - You might want to run `:Lazy sync` in the first run.
 - This setup is copied from various places, and sometimes is buggy/annoying. If possible, maybe contribute your own Neovim configs (lol)?
 
-# SDDM theme.
-For the sddm theme (`sddm/sodium-sddm`):
-- Copy/move it to `/usr/share/sddm/themes` (you need to install [sddm](https://github.com/sddm/sddm) first for that directory to be generated).
-- Append the following content in `/etc/sddm.conf`:
-```
-[Theme]
-  Current=sodium-sddm
