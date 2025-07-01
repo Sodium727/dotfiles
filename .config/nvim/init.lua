@@ -30,3 +30,11 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false
 })
+
+vim.opt.expandtab=true
+vim.opt.autoindent=true
+vim.opt.shiftwidth=2
+vim.opt.tabstop=2
+vim.keymap.set('n', '<leader>o', ':silent update | !firefox "%"<CR>', { desc = "Open HTML in Firefox" })
+
+vim.opt.linebreak=true
