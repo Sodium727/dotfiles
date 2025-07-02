@@ -46,7 +46,7 @@ exec swayidle -w \
 	timeout 300 'swaylock -i ~/.config/sway/bg/lockscreen.png' \
 	timeout 600 'wlopm --off \*' \
 	resume 'wlopm --on \*' \
-	before-sleep 'swaylock -f -i ~/.config/sway/pics/Northern\ Lights3.png' \
+	before-sleep 'swaylock -f -i ~/.config/sway/bg/lockscreen.png' \
 	>/dev/null 2>&1 &
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -69,6 +69,12 @@ input type:touchpad {
   drag enabled
   scroll_method edge
   events disabled_on_external_mouse
+}
+
+input type:pointer {
+  accel_profile flat # flat/adaptive
+  pointer_accel 1.
+  scroll_factor 2.69
 }
 #
 # You can also configure each device individually.

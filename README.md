@@ -7,6 +7,8 @@ The goal is to make a functional yet responsive setup. Thus, there is zero compo
 
 # Prerequisites
 One way to install the all the following stuff is to run the `setup-arch.sh` file included. But read through (and edit) it carefully to make sure it's up to your liking!!
+In case you want to install stuff manually...
+- [neovim]() (main editor)
 - [yay](https://github.com/Jguer/yay) (to install stuff from the [AUR](https://aur.archlinux.org/)) (you can also use [paru](https://github.com/Morganamilo/paru), or build packages from source)
 - [tofi](https://github.com/philj56/tofi) (an app launcher similar to [rofi](https://github.com/davatorium/rofi) and [wofi](https://github.com/SimplyCEO/wofi)) (also used for clipboard display)
 - [sway](https://github.com/swaywm/sway) (and swaybg, swaylock, swayidle)
@@ -26,7 +28,7 @@ Make sure to back up your current configurations.
 - Simply copy everything in `.config/` to your own `~/.config` directory.
 - For the `.zshrc`, put it in your home directory `~`
 
-# Keybinds (just read `.config/sway/config` lol)
+# Sway keybinds (just read `.config/sway/config` lol)
 - The Modifier key (notated as `Mod`) here is the Windows key.
 
 - `Mod` + `Shift` + `S` : Screenshot (choose area, then it goes to clipboard).
@@ -39,13 +41,12 @@ Make sure to back up your current configurations.
 # Wallpaper
 To change it, maybe use [waypaper](https://github.com/anufrievroman/waypaper), or edit the 34th line in `.config/sway/config`, which looks like:
 ```
-output * bg /home/dat/.config/sway/pics/rapi.png fill
+output * bg /home/dat/.config/sway/bg/wallpaper.jpg fill
 ```
 The procedure is similar if you want to change lock screen background (edit all the lines in `.config/sway/config` that contains the `swaylock` command)
 
 - The rest is just Sway's default keybindinds.
 
 # Neovim
-- You might want to run `:Lazy sync` in the first run.
-- This setup is copied from various places, and sometimes is buggy/annoying. If possible, maybe contribute your own Neovim configs (lol)?
+- Uses NvChad configurations.
 
