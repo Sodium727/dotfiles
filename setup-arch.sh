@@ -63,5 +63,5 @@ cat "alias connect-wifi=\"sudo wpa_supplicant -B -i wlp2s0 -c /etc/wpa_supplican
 # winetricks d3dcompiler_47 d3d9 d3d11 dxvk vulkan
 
 # Login git
-git config --global user.email "tandatpham2608@gmail.com"
-git config --global user.name "Sodium727"
+# git config --global user.email "tandatpham2608@gmail.com"
+# git config --global user.name "Sodium727"
