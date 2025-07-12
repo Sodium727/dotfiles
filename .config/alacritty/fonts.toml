@@ -4,6 +4,6 @@ size = 10
 builtin_box_drawing = true
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "JetbrainsMono Nerd Font"
 
 

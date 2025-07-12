@@ -25,8 +25,6 @@ set $menu tofi-drun --drun-launch=true \
 	  --ascii-input true \
 	  --width 999 \
 	  --height 333
-# Your preferred file manager
-set $fileMan thunar
 
 ### Output configuration
 #
@@ -63,18 +61,20 @@ input type:keyboard {
 
 input type:touchpad {
   dwt enabled
-  tap disabled
-  natural_scroll disabled
+  tap enabled
   middle_emulation enabled
   drag enabled
-  scroll_method edge
+  # scroll_method edge
+  scroll_method two_finger
+  scroll_factor 1.05
+  natural_scroll enabled
   events disabled_on_external_mouse
 }
 
 input type:pointer {
   accel_profile flat # flat/adaptive
   pointer_accel 1.
-  scroll_factor 2.69
+  scroll_factor 1.35
 }
 #
 # You can also configure each device individually.
@@ -97,6 +97,9 @@ input type:pointer {
   bindsym $mod+q kill
 
   bindsym $mod+l exec swaylock -i ~/.config/sway/bg/lockscreen.png
+
+  bindsym $mod+x exec hyprpicker --format=hex | wl-copy
+  bindsym $mod+Alt+x exec hyprpicker --format=rgb | wl-copy
 
   # Start your launcher
   bindsym $mod+a exec $menu
@@ -242,6 +245,8 @@ bindsym $mod+r mode "resize"
   # Special keys to adjust brightness via brightnessctl
   bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
   bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+  bindsym --locked $mod+Alt+f3 exec brightnessctl set 5%-
+  bindsym --locked $mod+Alt+f4 exec brightnessctl set 5%+
   # Special key to take a screenshot with grim
   # bindsym Print exec grim
 
@@ -288,6 +293,7 @@ bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
 
 exec fcitx5 >/dev/null 2>&1 &
 exec swaync >/dev/null 2>&1 &
+exec gammastep -l 20.9957:106.6881 -m wayland >/dev/null 2>&1 &
 
 # Make notifications and pop-ups float
 for_window [window_type="notification"] floating enable
@@ -297,5 +303,5 @@ for_window [window_type="menu"] floating enable
 
 bindsym $mod+p exec ~/.config/sway/power.sh
 
-default_border pixel 3
+default_border pixel 1
 

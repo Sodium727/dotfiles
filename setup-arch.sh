@@ -9,17 +9,18 @@
 # sudo pacman-key --populate archlinux
 
 # Packages (General)
-sudo pacman -Sy --noconfirm --needed git base-devel less qbittorrent ripgrep neovim imv bat eza zoxide fcitx5 fcitx5-unikey fcitx5-config-qt mpv firefox flatpak ttf-jetbrains-mono-nerd 7zip alacritty noto-fonts-cjk npm ly man nnn
+sudo pacman -Sy --noconfirm --needed git base-devel less qbittorrent ripgrep neovim imv bat eza zoxide fcitx5 fcitx5-unikey fcitx5-config-qt mpv firefox flatpak ttf-jetbrains-mono-nerd 7zip alacritty noto-fonts-cjk ly man nnn brightnessctl playerctl
 
-# Packages (Audio)
+# Setup Audio
 sudo pacman -Rns pulseaudio pulseaudio-alsa jack --noconfirm
 sudo pacman -S --needed --noconfirm pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
 sudo systemctl mask pulseaudio
 sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
 
+# sudo usermod -aG video $USER # Replace $USER with your actual username.
 
 # Packages (Sway)
-sudo pacman -S --noconfirm --needed sway swaybg swaylock grim slurp mako cliphist swayidle
+sudo pacman -S --noconfirm --needed sway swaybg swaylock grim slurp mako cliphist swayidle gammastep xorg-xwayland
 
 # Packages (Hyprland)
 # sudo pacman -S --noconfirm --needed hyprlock hyprland hyprpaper hyprpolkitagent hyprsunset hyprpicker waybar
@@ -49,7 +50,7 @@ yay -S --noconfirm --needed tofi
 # bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
 
 # OhMyZsh Setup
-sudo pacman -S --noconfirm --needed zsh zsh-syntax-highlighting git-zsh-completion zsh-autosuggestions zsh-autocomplete zsh-history-substring-search
+sudo pacman -S --noconfirm --needed zsh zsh-syntax-highlighting git-zsh-completion zsh-autosuggestions zsh-autocomplete zsh-history-substring-search zsh-completion
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 
 cat "alias connect-wifi=\"sudo wpa_supplicant -B -i wlp2s0 -c /etc/wpa_supplicant/wpa_supplicant.conf && sudo dhcpcd\"" >> ~/.zshrc

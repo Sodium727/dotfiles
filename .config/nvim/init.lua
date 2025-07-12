@@ -1,40 +1,37 @@
-require("vim-options")
-require("keymaps")
-require("cmds")
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.mapleader = " "
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
+local lazy_config = require "configs.lazy"
+
+-- load plugins
 require("lazy").setup({
-  spec = {
-    { import = "plugins" }, -- loads all plugins in plugins/
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
   },
-  defaults = {
-    lazy = false, -- plugins are not lazy loaded by default
-  },
-})
 
-vim.diagnostic.config({
-  virtual_text = true,
-  virtual_lines = { current_line = true },
-  underline = true,
-  update_in_insert = false
-})
+  { import = "plugins" },
+}, lazy_config)
 
-vim.opt.expandtab=true
-vim.opt.autoindent=true
-vim.opt.shiftwidth=2
-vim.opt.tabstop=2
-vim.keymap.set('n', '<leader>o', ':silent update | !firefox "%"<CR>', { desc = "Open HTML in Firefox" })
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
 
-vim.opt.linebreak=true
+require "options"
+require "autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
