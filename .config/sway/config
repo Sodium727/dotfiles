@@ -18,17 +18,19 @@ set $term alacritty
 # Your preferred application launcher
 set $menu tofi-drun --drun-launch=true \
 	  --fuzzy-match=true \
-	  --prompt-text="Need something?" \
+	  --prompt-text="Launch?" \
 	  --font /usr/share/fonts/TTF/JetBrainsMonoNerdFont-Regular.ttf \
 	  --num-results 5 \
 	  --hint-font false \
 	  --ascii-input true \
-	  --width 999 \
-	  --height 333
+	  --width 69% \
+	  --height 333 \
+    --scale true \
+    --anchor bottom
 
 ### Output configuration
 #
-output * bg ~/.config/sway/bg/wallpaper.jpg fill
+output * bg ~/.config/sway/bg/wallpaper.jpg fill scale 0.75
 #
 # Example configuration:
 #
@@ -102,8 +104,35 @@ input type:pointer {
   bindsym $mod+Alt+x exec hyprpicker --format=rgb | wl-copy
 
   # Start your launcher
-  bindsym $mod+a exec $menu
+  bindsym $mod+Space exec $menu
 
+  # Show history with Mod+v
+  bindsym $mod+v exec cliphist list | tofi \
+                  --fuzzy-match true \
+  	  			      --prompt-text="Paste? " \
+  	  			      --num-results 5 \
+  	  			      --hint-font false \
+  	  			      --ascii-input true \
+  	  			      --height 45% \
+  	  			      --width 75% \
+                  --anchor center \
+                  --scale true \
+    		    | cliphist decode | wl-copy
+  
+  # Region screenshot + clipboard (no save) using Grim
+  bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+
+  bindsym $mod+Period exec BEMOJI_PICKER_CMD="tofi \
+  --hint-font false \
+  --ascii-input true \
+  --anchor top \
+  --width 75% \
+  --height 300 \
+  --prompt-text= \
+  --scale true \
+  --fuzzy-match true" \
+  bemoji -tc
+  
   # Drag floating windows by holding down $mod and left mouse button.
   # Resize them with right mouse button + $mod.
   # Despite the name, also works for non-floating windows.
@@ -115,7 +144,7 @@ input type:pointer {
   bindsym $mod+Shift+c reload
 
   # Exit sway (logs you out of your Wayland session)
-  bindsym $mod+Shift+p exec swaynag -t warning -m 'Exit sway?' -B 'Ye' 'swaymsg exit'
+  bindsym $mod+Shift+p exec swaynag -t warning -m 'quit sway?' -B 'ye' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -185,7 +214,7 @@ input type:pointer {
   bindsym $mod+f fullscreen
 
   # Toggle the current focus between tiling and floating mode
-  bindsym $mod+space floating toggle
+  bindsym $mod+Shift+Space floating toggle
 
   # Swap focus between the tiling area and the floating area
   # bindsym $mod+space focus mode_toggle
@@ -279,18 +308,6 @@ include /etc/sway/config.d/*
 # Start monitoring
 exec wl-paste --watch cliphist store >/dev/null 2>&1 &
 
-# Show history with Mod+v
-bindsym $mod+v exec cliphist list | tofi \
-	  			      --prompt-text="Paste?" \
-	  			      --num-results 12 \
-	  			      --hint-font false \
-	  			      --ascii-input true \
-	  			      --height 555 \
-  		    | cliphist decode | wl-copy
-
-# Region screenshot + clipboard (no save) using Grim
-bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
-
 exec fcitx5 >/dev/null 2>&1 &
 exec swaync >/dev/null 2>&1 &
 exec gammastep -l 20.9957:106.6881 -m wayland >/dev/null 2>&1 &
@@ -304,4 +321,8 @@ for_window [window_type="menu"] floating enable
 bindsym $mod+p exec ~/.config/sway/power.sh
 
 default_border pixel 1
+
+# Stuff for swayfx
+blur enable
+corner_radius 20
 

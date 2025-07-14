@@ -6,7 +6,8 @@ printf "Lock\nLogout\nSuspend\nReboot\nPoweroff" | \
        --num-results 5 \
        --hint-font false \
        --ascii-input true \
-       --width 999 \
+       --width 50% \
+       --anchor center \
        --height 333 | \
   while read -r choice; do
     case "$choice" in

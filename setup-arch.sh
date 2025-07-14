@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# This bash script is meant to be fetched from https://github.com/Sodium727/dotfiles, packed with everything included in the repo
-# It automates the post-installation of Arch Linux
-
 # Update the system and install required packages using pacman
 # sudo pacman -Sy --needed archlinux-keyring 
 # sudo pacman-key --init
@@ -10,6 +7,11 @@
 
 # Packages (General)
 sudo pacman -Sy --noconfirm --needed git base-devel less qbittorrent ripgrep neovim imv bat eza zoxide fcitx5 fcitx5-unikey fcitx5-config-qt mpv firefox flatpak ttf-jetbrains-mono-nerd 7zip alacritty noto-fonts-cjk ly man nnn brightnessctl playerctl
+
+# Install yay
+git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sifr
+
+
 
 # Setup Audio
 sudo pacman -Rns pulseaudio pulseaudio-alsa jack --noconfirm
@@ -20,22 +22,17 @@ sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.se
 # sudo usermod -aG video $USER # Replace $USER with your actual username.
 
 # Packages (Sway)
-sudo pacman -S --noconfirm --needed sway swaybg swaylock grim slurp mako cliphist swayidle gammastep xorg-xwayland
+yay -S swayfx tofi --noconfirm # SwayWM but cool effects
+sudo pacman -S --noconfirm --needed swaybg swaync swaylock grim slurp cliphist swayidle gammastep xorg-xwayland bemoji
+# If you want the vanilla sway
+# sudo pacman -S sway
 
 # Packages (Hyprland)
 # sudo pacman -S --noconfirm --needed hyprlock hyprland hyprpaper hyprpolkitagent hyprsunset hyprpicker waybar
-
-# Install yay
-git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sifr
-
-# AUR Packages
-yay -S --noconfirm --needed ventoy-bin
-
-# AUR Packages (Hyprland)
 # yay -S --noconfirm --needed hyprshot wlogout waypaper
 
-# AUR Packages (Sway)
-yay -S --noconfirm --needed tofi
+# Other AUR Packages
+yay -S --noconfirm --needed ventoy-bin
 
 # Install Packer plugin manager for Neovim
 # git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
@@ -53,7 +50,7 @@ yay -S --noconfirm --needed tofi
 sudo pacman -S --noconfirm --needed zsh zsh-syntax-highlighting git-zsh-completion zsh-autosuggestions zsh-autocomplete zsh-history-substring-search zsh-completion
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 
-cat "alias connect-wifi=\"sudo wpa_supplicant -B -i wlp2s0 -c /etc/wpa_supplicant/wpa_supplicant.conf && sudo dhcpcd\"" >> ~/.zshrc
+# cat "alias connect-wifi=\"sudo wpa_supplicant -B -i wlp2s0 -c /etc/wpa_supplicant/wpa_supplicant.conf && sudo dhcpcd\"" >> ~/.zshrc
 
 # PowerLevel10k for Zsh
 # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
