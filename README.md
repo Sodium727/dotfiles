@@ -35,7 +35,7 @@ Make sure to back up your current configurations.
 - `Mod` + `E`: Open file manager (thunar)
 - `Mod` + `L`: Lock screen (swaylock)
 - `Mod` + `T` or `Mod` + `Enter`: Open terminal (alacritty)
-- `Mod` + `A`: Open app launcher (tofi-drun)
+- `Mod` + `Space`: Open app launcher (tofi-drun)
 
 # Wallpaper
 To change backgrounds, edit `.config/sway/config`, at a line which may look like:
