@@ -43,10 +43,10 @@ output * bg ~/.config/sway/bg/wallpaper.jpg fill scale 0.75
 # Example configuration:
 #
 exec swayidle -w \
-	timeout 300 'swaylock -i ~/.config/sway/bg/lockscreen.png' \
+	timeout 300 'swaylock -i ~/.config/sway/bg/lockscreen.jpg' \
 	timeout 600 'wlopm --off \*' \
 	resume 'wlopm --on \*' \
-	before-sleep 'swaylock -f -i ~/.config/sway/bg/lockscreen.png' \
+	before-sleep 'swaylock -f -i ~/.config/sway/bg/lockscreen.jpg' \
 	>/dev/null 2>&1 &
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -98,7 +98,7 @@ input type:pointer {
   # Kill focused window
   bindsym $mod+q kill
 
-  bindsym $mod+l exec swaylock -i ~/.config/sway/bg/lockscreen.png
+  bindsym $mod+l exec swaylock -i ~/.config/sway/bg/lockscreen.jpg
 
   bindsym $mod+x exec hyprpicker --format=hex | wl-copy
   bindsym $mod+Alt+x exec hyprpicker --format=rgb | wl-copy
@@ -323,6 +323,6 @@ bindsym $mod+p exec ~/.config/sway/power.sh
 default_border pixel 1
 
 # Stuff for swayfx
-blur enable
-corner_radius 20
+# blur enable
+# corner_radius 20
 

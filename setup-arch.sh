@@ -22,8 +22,8 @@ sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.se
 # sudo usermod -aG video $USER # Replace $USER with your actual username.
 
 # Packages (Sway)
-yay -S swayfx tofi --noconfirm # SwayWM but cool effects
-sudo pacman -S --noconfirm --needed swaybg swaync swaylock grim slurp cliphist swayidle gammastep xorg-xwayland bemoji
+yay -S tofi --noconfirm # If you want cool effects, using SwayFX
+sudo pacman -S --noconfirm --needed swaybg swaync swaylock grim slurp cliphist swayidle gammastep xorg-xwayland bemoji sway
 # If you want the vanilla sway
 # sudo pacman -S sway
 
