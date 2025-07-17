@@ -6,7 +6,7 @@
 # sudo pacman-key --populate archlinux
 
 # Packages (General)
-sudo pacman -Sy --noconfirm --needed git base-devel less qbittorrent ripgrep neovim imv bat eza zoxide fcitx5 fcitx5-unikey fcitx5-config-qt mpv firefox flatpak ttf-jetbrains-mono-nerd 7zip alacritty noto-fonts-cjk ly man nnn brightnessctl playerctl
+sudo pacman -Sy --noconfirm --needed git base-devel less qbittorrent ripgrep neovim imv bat eza fcitx5 fcitx5-unikey fcitx5-config-qt mpv firefox flatpak ttf-jetbrains-mono-nerd 7zip alacritty noto-fonts-cjk man nnn brightnessctl playerctl
 
 # Install yay
 git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sifr
@@ -22,17 +22,19 @@ sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.se
 # sudo usermod -aG video $USER # Replace $USER with your actual username.
 
 # Packages (Sway)
-yay -S tofi --noconfirm # If you want cool effects, using SwayFX
-sudo pacman -S --noconfirm --needed swaybg swaync swaylock grim slurp cliphist swayidle gammastep xorg-xwayland bemoji sway
+yay -S swaylock-effects --noconfirm 
+sudo pacman -S --noconfirm --needed swaybg swaync grim slurp cliphist swayidle gammastep xorg-xwayland bemoji sway fuzzel
 # If you want the vanilla sway
 # sudo pacman -S sway
+
+bemoji --download all
 
 # Packages (Hyprland)
 # sudo pacman -S --noconfirm --needed hyprlock hyprland hyprpaper hyprpolkitagent hyprsunset hyprpicker waybar
 # yay -S --noconfirm --needed hyprshot wlogout waypaper
 
 # Other AUR Packages
-yay -S --noconfirm --needed ventoy-bin
+# yay -S --noconfirm --needed ventoy-bin
 
 # Install Packer plugin manager for Neovim
 # git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim

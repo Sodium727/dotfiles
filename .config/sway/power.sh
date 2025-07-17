@@ -11,7 +11,7 @@ printf "Lock\nLogout\nSuspend\nReboot\nPoweroff" | \
        --height 333 | \
   while read -r choice; do
     case "$choice" in
-      "Lock")     swaylock -i /home/dat/Pictures/Wallpapers/Northern\ Lights3.png ;;
+      "Lock")     swaylock -i ~/.config/sway/bg/lockscreen.jpg ;;
       "Logout")   swaymsg exit ;;
       "Suspend")  systemctl suspend ;;
       "Reboot")   systemctl reboot ;;

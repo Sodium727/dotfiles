@@ -10,15 +10,17 @@ One way to install the all the following stuff is to run the `setup-arch.sh` fil
 In case you want to install stuff manually...
 - [neovim](https://github.com/neovim/neovim) (text editor), uses the [NvChad](https://github.com/NvChad/NvChad) configurations
 - [yay](https://github.com/Jguer/yay) (to install stuff from the [AUR](https://aur.archlinux.org/)) (you can also use [paru](https://github.com/Morganamilo/paru))
-- [tofi](https://github.com/philj56/tofi) (an app launcher similar to [rofi](https://github.com/davatorium/rofi) and [wofi](https://github.com/SimplyCEO/wofi)) (also used for clipboard display)
 - [sway](https://github.com/swaywm/sway) (and swaybg, swaylock, swayidle)
+- [fuzzel](https://mark.stosberg.com/fuzzel-a-great-dmenu-and-rofi-altenrative-for-wayland/) (app launcher)
 - [cliphist](https://github.com/sentriz/cliphist) (the clipboard manager)
 - swaync (notification daemon) + [catppuccin theme](https://github.com/catppuccin/swaync)
 - [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) (take screenshots)
+- [bemoji](https://github.com/marty-oehme/bemoji) (get emojis)
 - [alacritty](https://github.com/alacritty/alacritty) (terminal emulator)
 - [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh) (need to install [zsh](https://www.zsh.org/) shell first)
 - [nnn](https://github.com/jarun/nnn) (TUI file manager)
 - [JetBrainsMono](https://github.com/JetBrains/JetBrainsMono), or the [Nerd Font](https://github.com/ryanoasis/nerd-fonts) version.
+- [waybar](https://github.com/Alexays/Waybar) (status bar)
 ### Optional
 - [fcitx5](https://github.com/fcitx/fcitx5) (for keyboard language)
 - [thunar](https://github.com/neilbrown/thunar) (GUI file manager). Use it when drag-drop files is needed
@@ -31,11 +33,11 @@ Make sure to back up your current configurations.
 - The Modifier key (notated as `Mod`) here is the Windows key.
 
 - `Mod` + `Shift` + `S` : Screenshot (choose area, then it goes to clipboard).
-- `Mod` + `V`: Open clipboard history (in tofi)
+- `Mod` + `V`: Open clipboard history (in fuzzel)
 - `Mod` + `E`: Open file manager (thunar)
 - `Mod` + `L`: Lock screen (swaylock)
 - `Mod` + `T` or `Mod` + `Enter`: Open terminal (alacritty)
-- `Mod` + `Space`: Open app launcher (tofi-drun)
+- `Mod` + `Space`: Open app launcher (fuzzel)
 
 # Wallpaper
 To change backgrounds, edit `.config/sway/config`, at a line which may look like:
