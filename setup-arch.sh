@@ -23,7 +23,7 @@ sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.se
 
 # Packages (Sway)
 yay -S swaylock-effects --noconfirm 
-sudo pacman -S --noconfirm --needed swaybg swaync grim slurp cliphist swayidle gammastep xorg-xwayland bemoji sway fuzzel
+sudo pacman -S --noconfirm --needed swaybg swaync cliphist swayidle gammastep xorg-xwayland bemoji sway fuzzel hyprshot
 # If you want the vanilla sway
 # sudo pacman -S sway
 
