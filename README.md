@@ -1,19 +1,15 @@
-# dotfiles
-Configuration files (for Arch Linux).
-
 # Introduction
-So uhh... It's simple, just copy everything and put them in the correct directories of your Arch Linux machine.
+It's simple, just copy everything and put them in the correct directories of your Arch Linux machine.
 The goal is to make a functional, performant setup. Thus, there is zero composition (no eyes-candy!).
 
 # Prerequisites
 One way to install the all the following stuff is to run the `setup-arch.sh` file included. But read through (and edit) it carefully to make sure it's up to your liking!!
 In case you want to install stuff manually...
-- [neovim](https://github.com/neovim/neovim) (text editor), uses the [NvChad](https://github.com/NvChad/NvChad) configurations
+- [neovim](https://github.com/neovim/neovim) (text editor) (with Lazy plugins manager)
 - [yay](https://github.com/Jguer/yay) (to install stuff from the [AUR](https://aur.archlinux.org/)) (you can also use [paru](https://github.com/Morganamilo/paru))
-- [sway](https://github.com/swaywm/sway) (and swaybg, swaylock, swayidle)
+- [sway](https://github.com/swaywm/sway) (and swaybg, swaylock-effects, swayidle, swaync...)
 - [fuzzel](https://mark.stosberg.com/fuzzel-a-great-dmenu-and-rofi-altenrative-for-wayland/) (app launcher)
 - [cliphist](https://github.com/sentriz/cliphist) (the clipboard manager)
-- swaync (notification daemon) + [catppuccin theme](https://github.com/catppuccin/swaync)
 - [grim](https://github.com/emersion/grim) and [slurp](https://github.com/emersion/slurp) (take screenshots)
 - [bemoji](https://github.com/marty-oehme/bemoji) (get emojis)
 - [alacritty](https://github.com/alacritty/alacritty) (terminal emulator)
@@ -40,12 +36,11 @@ Make sure to back up your current configurations.
 - `Mod` + `Space`: Open app launcher (fuzzel)
 
 # Wallpaper
-To change backgrounds, edit `.config/sway/config`, at a line which may look like:
+To change background, edit `.config/sway/config`, at a line which may look like:
 ```
 output * bg /home/dat/.config/sway/bg/wallpaper.jpg fill
 ```
 Or use [swaybg](https://github.com/swaywm/swaybg)
-The procedure is similar if you want to change lock screen background (edit all the lines in `.config/sway/config` that contains the `swaylock` command)
 
 # The `setup-arch.sh` script
 It is meant for personal use, though you can always give it a run (make sure to read it carefully). It is recommended to run it on a fresh installation of Arch Linux.

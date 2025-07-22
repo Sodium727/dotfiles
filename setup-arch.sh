@@ -14,10 +14,10 @@ git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sifr
 
 
 # Setup Audio
-sudo pacman -Rns pulseaudio pulseaudio-alsa jack --noconfirm
-sudo pacman -S --needed --noconfirm pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
-sudo systemctl mask pulseaudio
-sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
+# sudo pacman -Rns pulseaudio pulseaudio-alsa jack --noconfirm
+# sudo pacman -S --needed --noconfirm pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber
+# sudo systemctl mask pulseaudio
+# sudo systemctl enable --now pipewire.socket pipewire-pulse.socket wireplumber.service
 
 # sudo usermod -aG video $USER # Replace $USER with your actual username.
 
@@ -38,6 +38,9 @@ bemoji --download all
 
 # Install Packer plugin manager for Neovim
 # git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+# Install Lazy plugin manager for Neovim
+# git clone https://github.com/folke/lazy.nvim.git ~/.local/share/nvim/lazy/lazy.nvim
 
 # JaKooLit's hyprland 
 # git clone https://github.com/JaKooLit/Arch-Hyprland.git ~/Arch-Hyprland

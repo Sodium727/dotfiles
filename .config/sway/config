@@ -41,10 +41,10 @@ output * bg ~/.config/sway/bg/wallpaper.jpg fill scale 0.75
 # Example configuration:
 #
 exec swayidle -w \
-	timeout 300 'swaylock' \
-	timeout 600 'wlopm --off \*' \
-	resume 'wlopm --on \*' \
-	before-sleep 'swaylock' \
+  timeout 300 'swaylock' \
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock' \
 	>/dev/null 2>&1 &
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -98,8 +98,8 @@ input type:pointer {
 
   bindsym $mod+l exec swaylock
 
-  bindsym $mod+x exec hyprpicker --format=hex | wl-copy
-  bindsym $mod+Alt+x exec hyprpicker --format=rgb | wl-copy
+  # bindsym $mod+x exec hyprpicker --format=hex | wl-copy
+  # bindsym $mod+Alt+x exec hyprpicker --format=rgb | wl-copy
 
   # Start your launcher
   bindsym $mod+d exec $menu

@@ -90,6 +90,33 @@ require('lazy').setup({
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       
+      -- Custom icons for diagnostics
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+
+      -- Diagnostic configuration
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = '●',       -- Show bullet prefix for inline diagnostics
+          spacing = 4,        -- Add some spacing
+        },
+        severity_sort = true,
+        float = {
+          border = 'rounded',
+          source = 'always',
+          header = '',
+          prefix = function(diagnostic)
+            return string.format('%s: ', diagnostic.source)
+          end,
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+      })
+      
       -- Language servers with custom configurations
       local servers = {
         clangd = {
@@ -100,7 +127,10 @@ require('lazy').setup({
             "--header-insertion=iwyu",
             "--completion-style=detailed",
             "--function-arg-placeholders",
-            "--fallback-style=llvm"
+            "--fallback-style=llvm",
+            "--all-scopes-completion",
+            "--cross-file-rename",
+            "--suggest-missing-includes"
           },
         },
         pyright = {
@@ -158,6 +188,13 @@ require('lazy').setup({
           vim.keymap.set('n', '<leader>f', function()
             vim.lsp.buf.format { async = true }
           end, opts)
+          
+          -- Diagnostic keybindings
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+          vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, opts)
+          vim.keymap.set('n', '<leader>do', vim.diagnostic.open_float, opts)
+          vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist, opts)  -- Add diagnostics to quickfix list
         end
       })
     end
@@ -260,6 +297,28 @@ require('lazy').setup({
     end
   },
 
+  -- Diagnostic UI Enhancements
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('trouble').setup({
+        position = 'bottom', -- Position of the list
+        height = 10,         -- Height of the trouble list
+        icons = true,
+        fold_open = '▼',
+        fold_closed = '▶',
+        indent_lines = true,
+        use_diagnostic_signs = true
+      })
+      
+      -- vim.keymap.set('n', '<leader>xx', '<cmd>TroubleToggle<cr>', { desc = 'Toggle Trouble' })
+      vim.keymap.set('n', '<leader>tq', '<cmd>Trouble quickfix<cr>', { desc = 'Quickfix List' })
+      vim.keymap.set('n', '<leader>td', '<cmd>Trouble document_diagnostics<cr>', { desc = 'Document Diagnostics' })
+      vim.keymap.set('n', '<leader>tw', '<cmd>Trouble workspace_diagnostics<cr>', { desc = 'Workspace Diagnostics' })
+    end
+  },
+
   -- Auto Pairs and Tags
   {
     'windwp/nvim-autopairs',
@@ -291,7 +350,16 @@ require('lazy').setup({
         sections = {
           lualine_c = {
             { 'filename', path = 1 }  -- Show relative path
-          }
+          },
+          lualine_x = {
+            {
+              'diagnostics',
+              sources = { 'nvim_diagnostic' },
+              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+              colored = true,
+              always_visible = true
+            }
+          },
         }
       })
     end
@@ -304,6 +372,14 @@ require('lazy').setup({
       require('gitsigns').setup({
         current_line_blame = true,
         sign_priority = 9,
+        signs = {
+          add          = { text = '│' },
+          change       = { text = '│' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked    = { text = '┆' },
+        },
       })
     end
   },
@@ -315,3 +391,79 @@ vim.cmd.colorscheme('tokyonight')
 -- Keybindings
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>', { desc = 'Clear search highlight' })
 vim.keymap.set('n', '<leader>tt', ':NvimTreeFindFileToggle<CR>', { desc = 'Toggle tree at current file' })
+-- Add this at the end of your init.lua file
+-- Select all with Ctrl+A
+vim.keymap.set({'n', 'v', 'i'}, '<C-a>', function()
+    -- For normal mode: select entire buffer
+    if vim.api.nvim_get_mode().mode == 'n' then
+        vim.cmd('normal! ggVG')
+    -- For insert mode: exit insert mode then select
+    elseif vim.api.nvim_get_mode().mode == 'i' then
+        vim.cmd('normal! <Esc>ggVG')
+    -- For visual mode: extend selection to entire buffer
+    else
+        vim.cmd('normal! ggVG')
+    end
+end, { desc = 'Select all' })
+
+local function apply_quickfix()
+    -- Get diagnostics at current cursor position
+    local bufnr = vim.api.nvim_get_current_buf()
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+    local line = cursor_pos[1] - 1  -- LSP uses 0-based indexing
+    local col = cursor_pos[2]
+    
+    -- Get diagnostics for current line
+    local diagnostics = vim.diagnostic.get(bufnr, { lnum = line })
+    if #diagnostics == 0 then
+        vim.notify("No diagnostics found at this position", vim.log.levels.INFO)
+        return
+    end
+    
+    -- Find diagnostic at cursor column
+    local target_diagnostic
+    for _, diag in ipairs(diagnostics) do
+        if diag.col <= col and col <= diag.end_col then
+            target_diagnostic = diag
+            break
+        end
+    end
+    
+    if not target_diagnostic then
+        vim.notify("No diagnostic found at cursor position", vim.log.levels.INFO)
+        return
+    end
+    
+    -- Prepare code action request
+    local params = {
+        textDocument = vim.lsp.util.make_text_document_params(),
+        range = {
+            start = { line = target_diagnostic.lnum, character = target_diagnostic.col },
+            ["end"] = { line = target_diagnostic.lnum, character = target_diagnostic.end_col }
+        },
+        context = {
+            diagnostics = { target_diagnostic },
+            only = { "quickfix", "source.fixAll" }
+        }
+    }
+    
+    -- Request code actions
+    vim.lsp.buf_request(bufnr, "textDocument/codeAction", params, function(_, actions)
+        if not actions or #actions == 0 then
+            vim.notify("No quickfix available for this diagnostic", vim.log.levels.INFO)
+            return
+        end
+        
+        -- Apply the first available fix
+        local action = actions[1]
+        if action.edit then
+            vim.lsp.util.apply_workspace_edit(action.edit)
+        end
+        if action.command then
+            vim.lsp.buf.execute_command(action.command)
+        end
+        vim.notify("Applied quickfix: " .. action.title, vim.log.levels.INFO)
+    end)
+end
+
+vim.keymap.set('n', '<leader>af', apply_quickfix, { desc = 'Apply Quickfix' })
