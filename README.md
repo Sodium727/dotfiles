@@ -29,10 +29,11 @@ Make sure to back up your current configurations.
 
 - `Mod` + `Shift` + `S` : Screenshot (choose area, then it goes to clipboard).
 - `Mod` + `V`: Open clipboard history (in fuzzel)
-- `Mod` + `E`: Open file manager (thunar)
+- `Mod` + `E`: Open file manager (nnn) (Add `Shift` to view hidden files)
 - `Mod` + `L`: Lock screen (swaylock)
 - `Mod` + `T` or `Mod` + `Enter`: Open terminal (alacritty)
-- `Mod` + `Space`: Open app launcher (fuzzel)
+- `Mod` + `D`: Open app launcher (fuzzel)
+- `Mod` + `Space`: Toggle floating or tiling mode of the focused window
 
 # Wallpaper
 To change background, edit `.config/sway/config`, at a line which may look like:
